@@ -4,13 +4,12 @@
 #
 # Usage:
 #   1) Remote (GitHub) Installation:
-#       curl -sSL https://raw.githubusercontent.com/<username>/<repo>/main/vbman.sh | bash
+#       curl -sSL https://raw.githubusercontent.com/michaelbolanos/vbman/main/vbman.sh | bash
 #       - Automatically installs vbman.sh to ~/scripts (or ~ if ~/scripts creation fails)
 #       - Immediately runs vbman.sh
 #   2) Local Execution (already downloaded):
 #       chmod +x vbman.sh
 #       ./vbman.sh
-#
 ################################################################################
 
 set -e  # Exit on errors
@@ -359,7 +358,7 @@ menu() {
                 ;;
             3)
                 list_vms
-                echo -n "Enter the number of the VM to shut down: ""
+                echo -n "Enter the number of the VM to shut down: "
                 read -r vm_num
                 vm_uuid=$(get_vm_uuids | sed -n "${vm_num}p" | xargs)
                 if [ -n "$vm_uuid" ]; then
@@ -404,4 +403,3 @@ menu() {
 }
 
 menu
-
