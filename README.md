@@ -1,9 +1,9 @@
-# 🌟 vbmain - VirtualBox VM Manager 🌟
+# 🌟 vbman - VirtualBox VM Manager 🌟
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Virtualbox_logo.png" width="350" alt="VirtualBox Logo">
 
 ## 🚀 Overview
-**vbmain** is a lightweight command-line tool for managing VirtualBox virtual machines (VMs) on Linux and macOS. It provides an interactive menu to list, start, and stop VMs with both graceful and force shutdown options. This script simplifies VM management without the need for the VirtualBox GUI.
+**vbman** is a lightweight command-line tool for managing VirtualBox virtual machines (VMs) on Linux and macOS. It provides an interactive menu to list, start, and stop VMs with both graceful and force shutdown options. This script simplifies VM management without the need for the VirtualBox GUI.
 
 ---
 
@@ -19,7 +19,7 @@
 
 ## 📌 Quick Install & Run (One-Liner)
 
-🔥 **Run this command to instantly download & run vbmain!** 🔥
+🔥 **Run this command to instantly download & run vbman!** 🔥
 
 ```bash
 bash <(curl -sSL https://raw.githubusercontent.com/michaelbolanos/vbman/main/vbman.sh)
@@ -45,9 +45,9 @@ brew install --cask virtualbox
 ## 🛠️ Installation (Manual)
 Clone the repository and make the script executable:
 ```bash
-git clone https://github.com/yourusername/vbmain.git
-cd vbmain
-chmod +x vbmain.sh
+git clone https://github.com/michaelbolanos/vbman.git
+cd vbman
+chmod +x vbman.sh
 ```
 
 ---
@@ -55,22 +55,22 @@ chmod +x vbmain.sh
 ## 🎮 Usage
 Run the script to open the interactive menu:
 ```bash
-./vbmain.sh
+./vbman.sh
 ```
 
 Alternatively, run specific commands directly:
 ```bash
 # List all VMs
-./vbmain.sh list
+./vbman.sh list
 
 # Start a specific VM (by name or UUID)
-./vbmain.sh start <vm_name_or_uuid>
+./vbman.sh start <vm_name_or_uuid>
 
 # Gracefully shut down a VM
-./vbmain.sh shutdown <vm_name_or_uuid>
+./vbman.sh shutdown <vm_name_or_uuid>
 
 # Force shut down a VM
-./vbmain.sh force-shutdown <vm_name_or_uuid>
+./vbman.sh force-shutdown <vm_name_or_uuid>
 ```
 
 ---
@@ -93,6 +93,29 @@ Enter your choice:
 
 ---
 
+## 🛠️ History: Iteration from Curl to Bash
+Initially, **vbman** was designed to be executed via a direct `curl` pipe:
+```bash
+curl -sSL https://raw.githubusercontent.com/michaelbolanos/vbman/main/vbman.sh | bash
+```
+However, this method caused **input issues** where the script could not properly capture user choices in the interactive menu. This was due to `bash` reading input directly from the pipe instead of allowing keyboard interaction.
+
+### 🔄 Iteration Process:
+1. **Direct Pipe Execution (`curl | bash`)** → Caused input issues.
+2. **Writing to a Temporary File First** → Allowed execution but cluttered the system.
+3. **Process Substitution (`bash <(curl ...)`)** → Fixed interactive input while keeping the one-liner simple.
+
+### 🎯 Final Solution:
+The final iteration settled on:
+```bash
+bash <(curl -sSL https://raw.githubusercontent.com/michaelbolanos/vbman/main/vbman.sh)
+```
+✅ Ensures full script execution before user input.  
+✅ Maintains simplicity—no need to manually download the script.  
+✅ Works consistently across macOS and Linux environments.
+
+---
+
 ## 🤝 Contributions
 Feel free to contribute by submitting a pull request or opening an issue!
 
@@ -104,6 +127,7 @@ This project is licensed under the MIT License.
 ---
 
 ## 👤 Author
-Created by [Michael Bolanos] - [(https://github.com/michaelbolanos]
+Created by [Michael Bolanos](https://github.com/michaelbolanos)
 
+![Thank You](https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif)
 
