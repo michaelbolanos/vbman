@@ -62,6 +62,64 @@ start_vm() {
     echo -e "${YELLOW}VM is now running.${RESET}"
 }
 
+# Run the menu
+menu()
+{
+    while true; do
+        echo -e "${CYAN}======================================${RESET}"
+        echo -e "${YELLOW} VirtualBox VM Management Script ${RESET}"
+        echo -e "${CYAN}======================================${RESET}"
+        echo -e "${GREEN}1)${RESET} List all VMs (Show Status)"
+        echo -e "${GREEN}2)${RESET} Start a VM"
+        echo -e "${GREEN}3)${RESET} Shut down a VM"
+        echo -e "${GREEN}4)${RESET} Force shut down a VM"
+        echo -e "${GREEN}5)${RESET} Shut down ALL running VMs"
+        echo -e "${GREEN}6)${RESET} Force shut down ALL running VMs"
+        echo -e "${RED}7) Exit${RESET}"
+        echo -e "${CYAN}======================================${RESET}"
+        echo -n "Enter your choice: "
+        read -r choice
+        if [ -z "$choice" ]; then
+            echo -e "${RED}No input detected. Please enter a valid option.${RESET}"
+            sleep 1
+            continue
+        fi
+        choice=$(echo "$choice" | tr -d '[:space:]')
+        if [ -z "$choice" ]; then
+            echo -e "${RED}No input detected. Please enter a valid option.${RESET}"
+            continue
+        fi
+        echo "DEBUG: User entered choice='$choice'"
+        case $choice in
+            1) 
+                list_vms
+                ;;
+            2)
+                list_vms
+                echo -n "Enter the number of the VM to start: "
+                read -r vm_num
+                vm_uuid=$(get_vm_uuids | sed -n "${vm_num}p" | xargs)
+                echo "DEBUG: Selected VM UUID='$vm_uuid'"
+                if [ -n "$vm_uuid" ]; then
+                    start_vm "$vm_uuid"
+                else
+                    echo -e "${RED}Invalid selection.${RESET}"
+                fi
+                ;;
+            7) 
+                echo -e "${GREEN}Exiting...${RESET}"
+                read -p "Press Enter to close the script..."
+                exit 0
+                ;;
+            *) 
+                echo -e "${RED}Invalid choice, please try again.${RESET}"
+                sleep 1
+                echo "DEBUG: Invalid choice detected, user entered='$choice'"
+                ;;
+        esac
+    done
+}
+
 # Detect if script is running from curl and provide an option for GitHub execution
 if [[ "$0" == "bash" || "$0" == "-bash" ]]; then
     echo -e "${YELLOW}Running in GitHub execution mode...${RESET}"
