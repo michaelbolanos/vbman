@@ -79,12 +79,12 @@ menu() {
         echo -e "${CYAN}======================================${RESET}"
         echo -n "Enter your choice: "
         # stty sane removed to prevent stdin issue
-        read -r choice
+        read -r choice </dev/tty
         if [ $? -ne 0 ]; then
             echo -e "${RED}Error reading input. Exiting.${RESET}"
             exit 1
         fi
-        choice=$(echo "$choice" | tr -d '[:space:]')
+        
         
         choice=$(echo "$choice" | tr -d '[:space:]')
         if [ -z "$choice" ]; then
@@ -120,7 +120,7 @@ menu() {
                 echo -e "${RED}Invalid choice, please try again.${RESET}"
                 sleep 1
                 echo "DEBUG: Invalid choice detected, user entered='$choice'"
-                read -p "Press Enter to return to the menu..."
+                
                 ;;
         esac
     done
