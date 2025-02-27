@@ -80,12 +80,16 @@ menu() {
         echo -n "Enter your choice: "
         # stty sane removed to prevent stdin issue
         if [ -t 0 ]; then
-            read -r -p "Enter your choice: " choice
+            read -r -p "Enter your choice: " choice < /dev/tty
         else
             echo "Input is not from a terminal. Please enter a choice manually:"
             read -r choice
         fi
-        choice=$(echo "$choice" | tr -d '[:space:]') # Trim spaces
+        choice=$(echo "$choice" | tr -d '[:space:]')
+        if [ -z "$choice" ]; then
+            echo "No input detected. Please enter a valid option."
+            continue
+        fi # Trim spaces
         echo "DEBUG: User entered choice='$choice'"
 
         case $choice in
