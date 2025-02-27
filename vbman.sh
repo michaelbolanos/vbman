@@ -79,10 +79,11 @@ menu() {
         echo -e "${CYAN}======================================${RESET}"
         echo -n "Enter your choice: "
         # stty sane removed to prevent stdin issue
-        read -r choice </dev/tty
-        if [ $? -ne 0 ]; then
-            echo -e "${RED}Error reading input. Exiting.${RESET}"
-            exit 1
+        read -r choice
+        if [ -z "$choice" ]; then
+            echo -e "${RED}No input detected. Please enter a valid option.${RESET}"
+            sleep 1
+            continue
         fi
         
         
