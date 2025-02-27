@@ -45,7 +45,7 @@ start_vm() {
     echo -e "${YELLOW}Do you want to start the VM in:${RESET}"
     echo -e "  ${GREEN}1) Headed (GUI) Mode${RESET}"
     echo -e "  ${GREEN}2) Headless (Background) Mode${RESET}"
-    echo -n "Enter your choice: "
+    
     read -r mode
 
     if [[ $mode == "1" ]]; then
@@ -79,7 +79,12 @@ menu() {
         echo -e "${CYAN}======================================${RESET}"
         echo -n "Enter your choice: "
         # stty sane removed to prevent stdin issue
-        read -r -p "Enter your choice: " choice
+        read -r choice
+        if [ $? -ne 0 ]; then
+            echo -e "${RED}Error reading input. Exiting.${RESET}"
+            exit 1
+        fi
+        choice=$(echo "$choice" | tr -d '[:space:]')
         
         choice=$(echo "$choice" | tr -d '[:space:]')
         if [ -z "$choice" ]; then
@@ -104,7 +109,7 @@ menu() {
                 else
                     echo -e "${RED}Invalid selection.${RESET}"
                 fi
-                read -p "Press Enter to return to the menu..."
+                
                 ;;
             7) 
                 echo -e "${GREEN}Exiting...${RESET}"
