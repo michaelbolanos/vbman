@@ -65,7 +65,7 @@ start_vm() {
 # Run the menu
 menu() {
     while true; do
-        clear
+        # clear (Disabled for debugging)
         echo -e "${CYAN}======================================${RESET}"
         echo -e "${YELLOW} VirtualBox VM Management Script ${RESET}"
         echo -e "${CYAN}======================================${RESET}"
@@ -78,7 +78,8 @@ menu() {
         echo -e "${RED}7) Exit${RESET}"
         echo -e "${CYAN}======================================${RESET}"
         echo -n "Enter your choice: "
-        read -r choice
+        stty sane  # Reset terminal settings
+        read -r -p "Enter your choice: " choice
         echo "DEBUG: User entered choice='$choice'"
 
         case $choice in
@@ -106,6 +107,7 @@ menu() {
                 ;;
             *) 
                 echo -e "${RED}Invalid choice, please try again.${RESET}"
+                sleep 1
                 echo "DEBUG: Invalid choice detected, user entered='$choice'"
                 read -p "Press Enter to return to the menu..."
                 ;;
