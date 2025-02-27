@@ -62,32 +62,7 @@ start_vm() {
     echo -e "${YELLOW}VM is now running.${RESET}"
 }
 
-# Function to shut down a VM gracefully with force shutdown fallback
-shutdown_vm() {
-    local vm_uuid="$1"
-    echo -e "${YELLOW}Attempting to gracefully shut down VM: $vm_uuid...${RESET}"
-    VBoxManage controlvm "$vm_uuid" acpipowerbutton
-    sleep 5  # Wait a few seconds for ACPI to take effect
-
-    # Check if VM is still running after ACPI shutdown attempt
-    if VBoxManage list runningvms | grep -q "$vm_uuid"; then
-        echo -e "${RED}ACPI shutdown failed! Forcing power off...${RESET}"
-        VBoxManage controlvm "$vm_uuid" poweroff
-        echo -e "${GREEN}VM $vm_uuid has been forcefully shut down.${RESET}"
-    else
-        echo -e "${GREEN}VM $vm_uuid has been shut down successfully.${RESET}"
-    fi
-}
-
-# Function to forcefully shut down a VM
-force_shutdown_vm() {
-    local vm_uuid="$1"
-    echo -e "${RED}Force shutting down VM with UUID: $vm_uuid...${RESET}"
-    VBoxManage controlvm "$vm_uuid" poweroff
-    echo -e "${GREEN}Forced shutdown executed.${RESET}"
-}
-
-# Fancy menu function
+# Run the menu
 menu() {
     while true; do
         clear
@@ -122,46 +97,9 @@ menu() {
                 fi
                 read -p "Press Enter to return to the menu..."
                 ;;
-            3)
-                list_vms
-                echo -n "Enter the number of the VM to shut down: "
-                read -r vm_num
-                vm_uuid=$(get_vm_uuids | sed -n "${vm_num}p" | xargs)
-                if [ -n "$vm_uuid" ]; then
-                    shutdown_vm "$vm_uuid"
-                else
-                    echo -e "${RED}Invalid selection.${RESET}"
-                fi
-                read -p "Press Enter to return to the menu..."
-                ;;
-            4)
-                list_vms
-                echo -n "Enter the number of the VM to FORCE shut down: "
-                read -r vm_num
-                vm_uuid=$(get_vm_uuids | sed -n "${vm_num}p" | xargs)
-                if [ -n "$vm_uuid" ]; then
-                    force_shutdown_vm "$vm_uuid"
-                else
-                    echo -e "${RED}Invalid selection.${RESET}"
-                fi
-                read -p "Press Enter to return to the menu..."
-                ;;
-            5)
-                echo -e "${YELLOW}Shutting down all running VMs...${RESET}"
-                for vm_uuid in $(get_running_vm_uuids); do
-                    shutdown_vm "$vm_uuid"
-                done
-                read -p "Press Enter to return to the menu..."
-                ;;
-            6)
-                echo -e "${RED}Force shutting down all running VMs...${RESET}"
-                for vm_uuid in $(get_running_vm_uuids); do
-                    force_shutdown_vm "$vm_uuid"
-                done
-                read -p "Press Enter to return to the menu..."
-                ;;
             7) 
                 echo -e "${GREEN}Exiting...${RESET}"
+                read -p "Press Enter to close the script..."
                 exit 0
                 ;;
             *) 
