@@ -79,7 +79,12 @@ menu() {
         echo -e "${CYAN}======================================${RESET}"
         echo -n "Enter your choice: "
         # stty sane removed to prevent stdin issue
-        read -r -p "Enter your choice: " choice < /dev/tty
+        if [ -t 0 ]; then
+            read -r -p "Enter your choice: " choice
+        else
+            echo "Input is not from a terminal. Please enter a choice manually:"
+            read -r choice
+        fi
         choice=$(echo "$choice" | tr -d '[:space:]') # Trim spaces
         echo "DEBUG: User entered choice='$choice'"
 
