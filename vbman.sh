@@ -62,6 +62,13 @@ start_vm() {
     echo -e "${YELLOW}VM is now running.${RESET}"
 }
 
+# Detect if script is running from curl and provide an option for GitHub execution
+if [[ "$0" == "bash" || "$0" == "-bash" ]]; then
+    echo -e "${YELLOW}Running in GitHub execution mode...${RESET}"
+    menu
+    exit 0
+fi
+
 # Run the menu
 menu() {
     while true; do
