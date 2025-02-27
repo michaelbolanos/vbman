@@ -79,15 +79,15 @@ menu() {
         echo -e "${CYAN}======================================${RESET}"
         echo -n "Enter your choice: "
         # stty sane removed to prevent stdin issue
-        if [ -t 0 ]; then
-            read -r -p "Enter your choice: " choice < /dev/tty
+        read -r -p "Enter your choice: " choice
         else
             echo "Input is not from a terminal. Please enter a choice manually:"
             read -r choice
         fi
         choice=$(echo "$choice" | tr -d '[:space:]')
         if [ -z "$choice" ]; then
-            echo "No input detected. Please enter a valid option."
+            echo -e "${RED}No input detected. Please enter a valid option.${RESET}"
+            continue
             continue
         fi # Trim spaces
         echo "DEBUG: User entered choice='$choice'"
@@ -95,7 +95,7 @@ menu() {
         case $choice in
             1) 
                 list_vms
-                # read -p "Press Enter to return to the menu..." (Removed to prevent loop issue)
+                # echo "Returning to menu..."; sleep 1 (Removed to prevent loop issue)
                 ;;
             2)
                 list_vms
