@@ -127,13 +127,6 @@ if [[ "$0" == "bash" || "$0" == "-bash" ]]; then
     exit 0
 fi
 
-# Run the menu
-    menu
-    exit 0
-fi
-
-
-
-# Run the menu
+# Otherwise, run menu normally
 menu
 
