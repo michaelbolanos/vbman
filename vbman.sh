@@ -34,14 +34,14 @@ get_vm_uuids() {
     VBoxManage list vms | awk -F\" '{print $3}' | tr -d '{} '
 }
 
+# Function to get running VM UUIDs
+get_running_vm_uuids() {
+    VBoxManage list runningvms | awk -F\" '{print $3}' | tr -d '{} '
+}
+
 # Function to start a VM with choice of head or headless
 start_vm() {
     local vm_uuid="$1"
-    if [[ -z "$vm_uuid" ]]; then
-        echo -e "${RED}Invalid VM selection. Returning to menu.${RESET}"
-        return
-    fi
-
     echo -e "${YELLOW}Do you want to start the VM in:${RESET}"
     echo -e "  ${GREEN}1) Headed (GUI) Mode${RESET}"
     echo -e "  ${GREEN}2) Headless (Background) Mode${RESET}"
@@ -62,7 +62,7 @@ start_vm() {
     echo -e "${YELLOW}VM is now running.${RESET}"
 }
 
-# Menu function with debug logging
+# Run the menu
 menu() {
     while true; do
         clear
@@ -72,11 +72,14 @@ menu() {
         echo -e "${GREEN}1)${RESET} List all VMs (Show Status)"
         echo -e "${GREEN}2)${RESET} Start a VM"
         echo -e "${GREEN}3)${RESET} Shut down a VM"
+        echo -e "${GREEN}4)${RESET} Force shut down a VM"
+        echo -e "${GREEN}5)${RESET} Shut down ALL running VMs"
+        echo -e "${GREEN}6)${RESET} Force shut down ALL running VMs"
         echo -e "${RED}7) Exit${RESET}"
         echo -e "${CYAN}======================================${RESET}"
         echo -n "Enter your choice: "
         read -r choice
-        echo "DEBUG: choice=$choice"  # Debugging line
+        echo "DEBUG: User entered choice='$choice'"
 
         case $choice in
             1) 
@@ -87,9 +90,8 @@ menu() {
                 list_vms
                 echo -n "Enter the number of the VM to start: "
                 read -r vm_num
-                echo "DEBUG: vm_num=$vm_num"  # Debugging line
                 vm_uuid=$(get_vm_uuids | sed -n "${vm_num}p" | xargs)
-                echo "DEBUG: vm_uuid=$vm_uuid"  # Debugging line
+                echo "DEBUG: Selected VM UUID='$vm_uuid'"
                 if [ -n "$vm_uuid" ]; then
                     start_vm "$vm_uuid"
                 else
@@ -104,6 +106,7 @@ menu() {
                 ;;
             *) 
                 echo -e "${RED}Invalid choice, please try again.${RESET}"
+                echo "DEBUG: Invalid choice detected, user entered='$choice'"
                 read -p "Press Enter to return to the menu..."
                 ;;
         esac
@@ -112,3 +115,4 @@ menu() {
 
 # Run the menu
 menu
+
