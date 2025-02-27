@@ -80,12 +80,13 @@ menu() {
         echo -n "Enter your choice: "
         stty sane  # Reset terminal settings
         read -r -p "Enter your choice: " choice
+        choice=$(echo "$choice" | tr -d '[:space:]') # Trim spaces
         echo "DEBUG: User entered choice='$choice'"
 
         case $choice in
             1) 
                 list_vms
-                read -p "Press Enter to return to the menu..."
+                # read -p "Press Enter to return to the menu..." (Removed to prevent loop issue)
                 ;;
             2)
                 list_vms
