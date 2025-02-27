@@ -78,8 +78,8 @@ menu() {
         echo -e "${RED}7) Exit${RESET}"
         echo -e "${CYAN}======================================${RESET}"
         echo -n "Enter your choice: "
-        stty sane  # Reset terminal settings
-        read -r -p "Enter your choice: " choice
+        # stty sane removed to prevent stdin issue
+        read -r -p "Enter your choice: " choice < /dev/tty
         choice=$(echo "$choice" | tr -d '[:space:]') # Trim spaces
         echo "DEBUG: User entered choice='$choice'"
 
