@@ -22,7 +22,7 @@
 🔥 **Run this command to instantly download & run vbmain!** 🔥
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/yourusername/vbmain/main/vbmain.sh | bash
+curl -sSL https://raw.githubusercontent.com/michaelbolanos/vbmain/main/vbmain.sh | bash
 ```
 
 > 💡 No need to manually clone the repository! Just copy, paste, and go!
