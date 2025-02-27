@@ -129,5 +129,3 @@ This project is licensed under the MIT License.
 ## 👤 Author
 Created by [Michael Bolanos](https://github.com/michaelbolanos)
 
-![Thank You](https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif)
-
