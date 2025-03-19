@@ -1,6 +1,6 @@
 # 🌟 vbman - VirtualBox VM Manager 🌟
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Virtualbox_logo.png" width="350" alt="VirtualBox Logo">
+<img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Virtualbox_logo.png" width="163" alt="VirtualBox Logo">
 
 ## 🚀 Overview
 **vbman** is a lightweight command-line tool for managing VirtualBox virtual machines (VMs) on Linux and macOS. It provides an interactive menu to list, start, and stop VMs with both graceful and force shutdown options. This script simplifies VM management without the need for the VirtualBox GUI.
