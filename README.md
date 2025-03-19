@@ -116,16 +116,6 @@ bash <(curl -sSL https://raw.githubusercontent.com/michaelbolanos/vbman/main/vbm
 
 ---
 
-## 🤝 Contributions
-Feel free to contribute by submitting a pull request or opening an issue
-
----
-
-## 📜 License
-This project is licensed under the MIT License.
-
----
-
 ## 👤 Author
 Created by [Michael Bolanos](https://github.com/michaelbolanos)
 
