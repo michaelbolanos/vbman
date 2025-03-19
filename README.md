@@ -1,8 +1,8 @@
-# 🌟 vbman - VirtualBox VM Manager 🌟
+# vbman - VirtualBox VM Manager
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Virtualbox_logo.png" width="163" alt="VirtualBox Logo">
 
-## 🚀 Overview
+## Overview
 **vbman** is a lightweight command-line tool for managing VirtualBox virtual machines (VMs) on Linux and macOS. It provides an interactive menu to list, start, and stop VMs with both graceful and force shutdown options. This script simplifies VM management without the need for the VirtualBox GUI.
 
 ---
@@ -19,17 +19,17 @@
 
 ## 📌 Quick Install & Run (One-Liner)
 
-🔥 **Run this command to instantly download & run vbman!** 🔥
+**Run this command to instantly download & run vbman**
 
 ```bash
 bash <(curl -sSL https://raw.githubusercontent.com/michaelbolanos/vbman/main/vbman.sh)
 ```
 
-> 💡 No need to manually clone the repository! Just copy, paste, and go!
+> No need to manually clone the repository! Just copy, paste, and go!
 
 ---
 
-## 🔧 Prerequisites
+## Prerequisites
 Ensure that VirtualBox and `VBoxManage` are installed on your system:
 ```bash
 # Install VirtualBox (Linux)
@@ -42,7 +42,7 @@ brew install --cask virtualbox
 
 ---
 
-## 🛠️ Installation (Manual)
+## Installation (Manual)
 Clone the repository and make the script executable:
 ```bash
 git clone https://github.com/michaelbolanos/vbman.git
@@ -52,7 +52,7 @@ chmod +x vbman.sh
 
 ---
 
-## 🎮 Usage
+## Usage
 Run the script to open the interactive menu:
 ```bash
 ./vbman.sh
@@ -75,7 +75,7 @@ Alternatively, run specific commands directly:
 
 ---
 
-## 🎭 Example Output
+## Example Output
 ```
 ======================================
  🎛️ VirtualBox VM Management Script 🎛️
@@ -93,19 +93,19 @@ Enter your choice:
 
 ---
 
-## 🛠️ History: Iteration from Curl to Bash
+## History: Iteration from Curl to Bash
 Initially, **vbman** was designed to be executed via a direct `curl` pipe:
 ```bash
 curl -sSL https://raw.githubusercontent.com/michaelbolanos/vbman/main/vbman.sh | bash
 ```
 However, this method caused **input issues** where the script could not properly capture user choices in the interactive menu. This was due to `bash` reading input directly from the pipe instead of allowing keyboard interaction.
 
-### 🔄 Iteration Process:
+### Iteration Process:
 1. **Direct Pipe Execution (`curl | bash`)** → Caused input issues.
 2. **Writing to a Temporary File First** → Allowed execution but cluttered the system.
 3. **Process Substitution (`bash <(curl ...)`)** → Fixed interactive input while keeping the one-liner simple.
 
-### 🎯 Final Solution:
+### Final Solution:
 The final iteration settled on:
 ```bash
 bash <(curl -sSL https://raw.githubusercontent.com/michaelbolanos/vbman/main/vbman.sh)
@@ -117,7 +117,7 @@ bash <(curl -sSL https://raw.githubusercontent.com/michaelbolanos/vbman/main/vbm
 ---
 
 ## 🤝 Contributions
-Feel free to contribute by submitting a pull request or opening an issue!
+Feel free to contribute by submitting a pull request or opening an issue
 
 ---
 
