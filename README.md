@@ -19,7 +19,7 @@
 
 ## 📌 Quick Install & Run (One-Liner)
 
-**Run this command at the CLI to instantly download & run vbman**
+**Run this command at the CLI to download & run vbman**
 
 ```bash
 bash <(curl -sSL https://raw.githubusercontent.com/michaelbolanos/vbman/main/vbman.sh)
