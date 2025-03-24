@@ -25,7 +25,7 @@
 bash <(curl -sSL https://raw.githubusercontent.com/michaelbolanos/vbman/main/vbman.sh)
 ```
 
-> No need to manually clone the repository! Just copy, paste, and go!
+> No need to manually clone the repository. Just copy, paste, and go.
 
 ---
 
